@@ -71,4 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("input").forEach((input) => {
         input.addEventListener("input", updateChartData);
     });
+
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        const link = document.createElement('a');
+        link.href = barChart.toBase64Image();
+        link.download = 'chart.png';
+        link.click();
+    });
 });
