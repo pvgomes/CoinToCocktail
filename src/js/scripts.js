@@ -46,21 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to update chart data
     function updateChartData() {
-        const incomeData = [];
-        const expensesData = [];
+        const incomeData = Array.from({ length: 12 }, (_, i) => {
+            const incomeInput = document.getElementById(`income${i + 1}`);
+            return incomeInput ? parseFloat(incomeInput.value) || 0 : 0;
+        });
 
-        // Loop through each month (1 to 12)
-        for (let i = 1; i <= 12; i++) {
-            const incomeInput = document.getElementById(`income${i}`);
-            const expensesInput = document.getElementById(`expenses${i}`);
-
-            // Get values or default to 0 if empty
-            const incomeValue = incomeInput ? parseFloat(incomeInput.value) || 0 : 0;
-            const expensesValue = expensesInput ? parseFloat(expensesInput.value) || 0 : 0;
-
-            incomeData.push(incomeValue);
-            expensesData.push(expensesValue);
-        }
+        const expensesData = Array.from({ length: 12 }, (_, i) => {
+            const expensesInput = document.getElementById(`expenses${i + 1}`);
+            return expensesInput ? parseFloat(expensesInput.value) || 0 : 0;
+        });
 
         // Update chart datasets
         barChart.data.datasets[0].data = incomeData;
